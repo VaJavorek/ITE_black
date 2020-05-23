@@ -57,10 +57,3 @@ def store_measurement(temp):
         body_alerts = {'createdOn': createdOn, 'sensorUUID': sensorUUID, 'temperature': str(temp), 'lowTemperature': str(lowTemp), 'highTemperature': str(highTemp)}
         requests.post(url_alerts, data=dumps_json(body_alerts), headers=headers_alerts)
         #print('Alert sent.')
-
-if __name__ == '__main__':
-    c = 1
-    while(True):
-        store_measurement(2)
-        print(c)
-        c += 1

@@ -7,10 +7,11 @@ import json
 import math
 import requests
 import rest_api_work as raw
+from threading import Timer, Thread
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('templates/index.html', title='Home Page', year=datetime.now().year)
+        self.render('templates/index.html', title='Home Page', year=datetime.datetime.now().year, blackAll = blackAll, blackDaysAll = blackDaysAll, pinkAll = pinkAll)
 
 #if __name__ == '__main__':
 #    main()
@@ -22,7 +23,7 @@ class MainHandler(tornado.web.RequestHandler):
 SERVER = '147.228.124.230'  # RPi
 TOPIC = 'ite/#'
 
-
+lastUpdateDay = None
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, mid, qos):
     print('Connected with result code qos:', str(qos))
@@ -32,90 +33,122 @@ def on_connect(client, userdata, mid, qos):
     client.subscribe(TOPIC)
     print("Subscribed to:",TOPIC)
 
+def setOffline():
+    print('offline')
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     if (msg.payload == 'Q'):
         client.disconnect()
-    #print(msg.topic, msg.qos, msg.payload)
+    print(msg.topic, msg.qos, msg.payload)
     JSON = json.loads(msg.payload)
     teamName = JSON['team_name']
     temperature = JSON['temperature']
     source = JSON['source']
     createdOn = datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f')
-
     if teamName == 'black':
-        if createdOn.day != blackLastUpdate.day:
-            blackAll.clear()
+        blackStatus = 'online'
+        Timer(2, setOffline()).start()
+        if blackDaysAll != []:
+            if blackDaysAll[-1] != createdOn.day:
+                blackAll.clear()
+                blackDaysAll.clear()
         blackActual = temperature
         blackAll.append(temperature)
+        blackDaysAll.append(createdOn.day)
         blackAverage = sum(blackAll) / len(blackAll)
         blackMax = max(blackAll)
         blackMin = min(blackAll)
-        blackLastUpdate = createdOn
+        blackLastUpdate = blackDateAll[-1]
         raw.store_measurement(blackActual)
-        #print(teamName, blackActual, blackAverage, blackMax, blackMin)
+        print('Team:', teamName,'Actual:', blackActual,'Average:', blackAverage,'Max:', blackMax,'Min:', blackMin)
+        print(blackDaysAll)
     elif teamName == 'pink':
-        if createdOn.day != pinkLastUpdate.day:
-            pinkAll.clear()
+        if pinkDaysAll != []:
+            if pinkDaysAll[-1] != createdOn.day:
+                pinkAll.clear()
+                pinkDaysAll.clear()
         pinkActual = temperature
         pinkAll.append(temperature)
+        pinkDaysAll.append(createdOn.day)
         pinkAverage = sum(pinkAll) / len(pinkAll)
         pinkMax = max(pinkAll)
         pinkMin = min(pinkAll)
         pinkLastUpdate = createdOn
-        #print(teamName, pinkActual, pinkAverage, pinkMax, pinkMin)
+        print('Team:', teamName,'Actual:', pinkActual,'Average:', pinkAverage,'Max:', pinkMax,'Min:', pinkMin)
+        print(pinkDaysAll)
     elif teamName == 'yellow':
-        if createdOn.day != yellowLastUpdate.day:
-            yellowAll.clear()
+        if yellowDaysAll != []:
+            if yellowDaysAll[-1] != createdOn.day:
+                yellowAll.clear()
+                yellowDaysAll.clear()
         yellowActual = temperature
         yellowAll.append(temperature)
+        yellowDaysAll.append(createdOn.day)
         yellowAverage = sum(yellowAll) / len(yellowAll)
         yellowMax = max(yellowAll)
         yellowMin = min(yellowAll)
         yellowLastUpdate = createdOn
-        #print(teamName, yellowActual, yellowAverage, yellowMax, yellowMin)
+        print('Team:', teamName,'Actual:', yellowActual,'Average:', yellowAverage,'Max:', yellowMax,'Min:', yellowMin)
+        print(yellowDaysAll)
     elif teamName == 'orange':
-        if createdOn.day != orangeLastUpdate.day:
-            orangeAll.clear()
+        if orangeDaysAll != []:
+            if orangeDaysAll[-1] != createdOn.day:
+                orangeAll.clear()
+                orangeDaysAll.clear()
         orangeActual = temperature
         orangeAll.append(temperature)
+        orangeDaysAll.append(createdOn.day)
         orangeAverage = sum(orangeAll) / len(orangeAll)
         orangeMax = max(orangeAll)
         orangeMin = min(orangeAll)
         orangeLastUpdate = createdOn
-        #print(teamName, orangeActual, orangeAverage, orangeMax, orangeMin)
+        print('Team:', teamName,'Actual:', orangeActual,'Average:', orangeAverage,'Max:', orangeMax,'Min:', orangeMin)
+        print(orangeDaysAll)
     elif teamName == 'red':
-        if createdOn.day != redLastUpdate.day:
-            redAll.clear()
+        if redDaysAll != []:
+            if redDaysAll[-1] != createdOn.day:
+                redAll.clear()
+                redDaysAll.clear()
         redActual = temperature
         redAll.append(temperature)
+        redDaysAll.append(createdOn.day)
         redAverage = sum(redAll) / len(redAll)
         redMax = max(redAll)
         redMin = min(redAll)
         redLastUpdate = createdOn
-        #print(teamName, redActual, redAverage, redMax, redMin)
+        print('Team:', teamName,'Actual:', redActual,'Average:', redAverage,'Max:', redMax,'Min:', redMin)
+        print(redDaysAll)
     elif teamName == 'green':
-        if createdOn.day != greenLastUpdate.day:
-            greenAll.clear()
+        if greenDaysAll != []:
+            if greenDaysAll[-1] != createdOn.day:
+                greenAll.clear()
+                greenDaysAll.clear()
         greenActual = temperature
         greenAll.append(temperature)
+        greenDaysAll.append(createdOn.day)
         greenAverage = sum(greenAll) / len(greenAll)
         greenMax = max(greenAll)
         greenMin = min(greenAll)
         greenLastUpdate = createdOn
-        #print(teamName, greenActual, greenAverage, greenMax, greenMin)
+        print('Team:', teamName,'Actual:', greenActual,'Average:', greenAverage,'Max:', greenMax,'Min:', greenMin)
+        print(greenDaysAll)
     elif teamName == 'blue':
-        if createdOn.day != blueLastUpdate.day:
-            blueAll.clear()
+        if blueDaysAll != []:
+            if blueDaysAll[-1] != createdOn.day:
+                blueAll.clear()
+                blueDaysAll.clear()
         blueActual = temperature
         blueAll.append(temperature)
+        blueDaysAll.append(createdOn.day)
         blueAverage = sum(blueAll) / len(blueAll)
         blueMax = max(blueAll)
         blueMin = min(blueAll)
         blueLastUpdate = createdOn
-        #print(teamName, blueActual, blueAverage, blueMax, blueMin)
+        print('Team:', teamName,'Actual:', blueActual,'Average:', blueAverage,'Max:', blueMax,'Min:', blueMin)
+        print(blueDaysAll)
+    print('Black status: ', blackStatus)
 
-def main():
+def mainClient():
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
@@ -130,13 +163,40 @@ def main():
     #app.listen(8889)
     client.loop_forever()
 
+def mainWebserver():
+    app = TornadoApplication([(r'/', MainHandler),(r'/(.*)', StaticFileHandler, {
+            'path': join_path(dirname(__file__), 'static')})])
+    app.listen(8889)
+    f1 = tornado.ioloop.IOLoop.current().start()
+    t1 = Thread(target = f1)
+    t1.start()
 
 if __name__ == '__main__':
     blackAll = []
+    blackDaysAll = []
+
     pinkAll = []
+    pinkDaysAll = []
+
     yellowAll = []
+    yellowDaysAll = []
+
     orangeAll = []
+    orangeDaysAll = []
+
     redAll = []
+    redDaysAll = []
+
     greenAll = []
+    greenDaysAll = []
+
     blueAll = []
-    main()
+    blueDaysAll = []
+
+    
+    f2 = mainClient
+
+    t2 = Thread(target = f2)
+
+    t2.start()
+    mainWebserver()
