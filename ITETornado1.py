@@ -32,6 +32,22 @@ def on_connect(client, userdata, mid, qos):
     # reconnect then subscriptions will be renewed.
     client.subscribe(TOPIC)
     print("Subscribed to:",TOPIC)
+   
+def store_to_txt(color, status, actual, average, max, min, lastUpdate):
+  '''
+  Store the data to a .txt file in the following order:
+  [color]Status
+  [color]Actual
+  [color]Average
+  [color]Max
+  [color]Min
+  [color]LastUpdate
+  '''
+  stuff = [str(status), str(actual), str(average), str(max), str(min), str(lastUpdate)]
+  with open(f'save_{color}.txt', 'w') as tf:
+    for i in stuff:
+      tf.write(i)
+      tf.write(str('\n'))
 
 def setOffline():
     print('offline')
