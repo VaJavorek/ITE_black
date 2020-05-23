@@ -1,0 +1,238 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <p>Client status: <strong id="client_status"></strong></p>
+        
+        <table width="100%">
+            <tr>
+                <td>
+                    <h1><small>Team name: </small><strong style="color:black">Black</strong></h1>
+
+                    <p>Status of sensor: <strong id="status_black" style="color:red">offline</strong></p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Actual temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_black">---</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_black">---</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_black">---</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_black">---</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_black"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <h1><small>Team name: </small><strong style="color:pink">Pink</strong></h1>
+
+                    <p>Status of sensor: <strong id="status_pink" style="color:green">online</strong></p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Actual temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_pink">---</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_pink">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_pink">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_pink">---</span> &deg;C</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h1><small>Team name: </small><strong style="color:yellow">Yellow</strong></h1>
+
+                    <p>Status of sensor: <strong id="status_yellow" style="color:green">online</strong></p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Actual temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_yellow">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_yellow">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_yellow">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_yellow">---</span> &deg;C</td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td>
+                    <h1><small>Team name: </small><strong style="color:orange">Orange</strong></h1>
+
+                    <p>Status of sensor: <strong id="status_orange" style="color:green">online</strong></p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Actual temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_orange">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_orange">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_orange">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_orange">---</span> &deg;C</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h1><small>Team name: </small><strong style="color:red">Red</strong></h1>
+
+                    <p>Status of sensor: <strong id="status_red" style="color:green">online</strong></p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Actual temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_red">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_red">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_red">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_red">---</span> &deg;C</td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td>
+                    <h1><small>Team name: </small><strong style="color:green">Green</strong></h1>
+
+                    <p>Status of sensor: <strong id="status_green" style="color:green">online</strong></p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Actual temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_green">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_green">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_green">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_green">---</span> &deg;C</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h1><small>Team name: </small><strong style="color:blue">Blue</strong></h1>
+
+                    <p>Status of sensor: <strong id="status_blue" style="color:green">online</strong></p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Actual temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_blue">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_blue">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_blue">---</span> &deg;C</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_blue">---</span> &deg;C</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% end %}
