@@ -44,7 +44,7 @@ def store_to_txt(color, status, actual, average, max, min, lastUpdate):
   [color]LastUpdate
   '''
   stuff = [str(status), str(actual), str(average), str(max), str(min), str(lastUpdate)]
-  with open(f'save_{color}.txt', 'w') as tf:
+  with open('save_{}.txt'.format(color), 'w') as tf:
     for i in stuff:
       tf.write(i)
       tf.write(str('\n'))
