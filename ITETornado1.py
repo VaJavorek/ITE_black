@@ -50,8 +50,22 @@ def store_to_txt(color, status, actual, average, max, min, lastUpdate):
       tf.write(str('\n'))
   print('Stored to txt')
 
-def setOffline():
-    print('offline')
+def setOffline(teamName):
+    print(teamName, ': offline')
+    
+def setOnline(teamName):
+    print(teamName, ': online')
+    
+def checkTime():
+    print("\nPeriodicity check\n")
+    checkOn = datetime.datetime.now()
+    for key, value in timeChecking.items():
+        delay = (checkOn - value).seconds
+        #print(key,':',delay)
+        if delay > 300: #přidat podmínku na vrácení se do online (když je offline, ale je menší jak 300)
+            setOffline(key)
+    Timer(10.0, checkTime).start()
+
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     if (msg.payload == 'Q'):
@@ -62,6 +76,7 @@ def on_message(client, userdata, msg):
     temperature = JSON['temperature']
     source = JSON['source']
     createdOn = datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f')
+    timeChecking[str(teamName)] = datetime.datetime.now() #slovník časů posledních zpráv pro jednotlivé týmy
     if teamName == 'black':
         blackStatus = 'online'
         Timer(2, setOffline()).start()
@@ -217,6 +232,8 @@ if __name__ == '__main__':
     blueAll = []
     blueDaysAll = []
 
+    timeChecking = {}
+    Timer(10.0, checkTime).start()
     
     f2 = mainClient
 
