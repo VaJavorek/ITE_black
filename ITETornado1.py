@@ -48,6 +48,7 @@ def store_to_txt(color, status, actual, average, max, min, lastUpdate):
     for i in stuff:
       tf.write(i)
       tf.write(str('\n'))
+  print('Stored to txt')
 
 def setOffline():
     print('offline')
@@ -78,6 +79,7 @@ def on_message(client, userdata, msg):
         raw.store_measurement(blackActual)
         print('Team:', teamName,'Actual:', blackActual,'Average:', blackAverage,'Max:', blackMax,'Min:', blackMin)
         print(blackDaysAll)
+        store_to_txt(teamName, blackStatus, blackActual, blackAverage, blackMax, blackMin, blackLastUpdate)
     elif teamName == 'pink':
         if pinkDaysAll != []:
             if pinkDaysAll[-1] != createdOn.day:
@@ -92,6 +94,7 @@ def on_message(client, userdata, msg):
         pinkLastUpdate = createdOn
         print('Team:', teamName,'Actual:', pinkActual,'Average:', pinkAverage,'Max:', pinkMax,'Min:', pinkMin)
         print(pinkDaysAll)
+        store_to_txt(teamName, pinkStatus, pinkActual, pinkAverage, pinkMax, pinkMin, pinkLastUpdate)
     elif teamName == 'yellow':
         if yellowDaysAll != []:
             if yellowDaysAll[-1] != createdOn.day:
@@ -106,6 +109,7 @@ def on_message(client, userdata, msg):
         yellowLastUpdate = createdOn
         print('Team:', teamName,'Actual:', yellowActual,'Average:', yellowAverage,'Max:', yellowMax,'Min:', yellowMin)
         print(yellowDaysAll)
+        store_to_txt(teamName, yellowStatus, yellowActual, yellowAverage, yellowMax, yellowMin, yellowLastUpdate)
     elif teamName == 'orange':
         if orangeDaysAll != []:
             if orangeDaysAll[-1] != createdOn.day:
@@ -120,6 +124,7 @@ def on_message(client, userdata, msg):
         orangeLastUpdate = createdOn
         print('Team:', teamName,'Actual:', orangeActual,'Average:', orangeAverage,'Max:', orangeMax,'Min:', orangeMin)
         print(orangeDaysAll)
+        store_to_txt(teamName, orangeStatus, orangeActual, orangeAverage, orangeMax, orangeMin, orangeLastUpdate)
     elif teamName == 'red':
         if redDaysAll != []:
             if redDaysAll[-1] != createdOn.day:
@@ -134,6 +139,7 @@ def on_message(client, userdata, msg):
         redLastUpdate = createdOn
         print('Team:', teamName,'Actual:', redActual,'Average:', redAverage,'Max:', redMax,'Min:', redMin)
         print(redDaysAll)
+        store_to_txt(teamName, redStatus, redActual, redAverage, redMax, redMin, redLastUpdate)
     elif teamName == 'green':
         if greenDaysAll != []:
             if greenDaysAll[-1] != createdOn.day:
@@ -148,6 +154,7 @@ def on_message(client, userdata, msg):
         greenLastUpdate = createdOn
         print('Team:', teamName,'Actual:', greenActual,'Average:', greenAverage,'Max:', greenMax,'Min:', greenMin)
         print(greenDaysAll)
+        store_to_txt(teamName, greenStatus, greenActual, greenAverage, greenMax, greenMin, greenLastUpdate)
     elif teamName == 'blue':
         if blueDaysAll != []:
             if blueDaysAll[-1] != createdOn.day:
@@ -162,7 +169,8 @@ def on_message(client, userdata, msg):
         blueLastUpdate = createdOn
         print('Team:', teamName,'Actual:', blueActual,'Average:', blueAverage,'Max:', blueMax,'Min:', blueMin)
         print(blueDaysAll)
-    print('Black status: ', blackStatus)
+        print('Black status: ', blackStatus)
+        store_to_txt(teamName, blueStatus, blueActual, blueAverage, blueMax, blueMin, blueLastUpdate)
 
 def mainClient():
     client = mqtt.Client()
