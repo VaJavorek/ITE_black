@@ -51,18 +51,22 @@ def store_to_txt(color, status, actual, average, max, min, lastUpdate):
   print('Stored to txt')
 
 def setOffline(teamName):
-    print(teamName, ': offline')
+    with open('save_{}.txt'.format(teamName)) as f:
+        lines = f.readlines()
     
-def setOnline(teamName):
-    print(teamName, ': online')
-    
+    if lines[0] == 'online\n':
+        lines[0] = 'offline\n'
+        with open('save_{}.txt'.format(teamName), "w") as f:
+            f.writelines(lines)
+        f.close()
+
 def checkTime():
     print("\nPeriodicity check\n")
     checkOn = datetime.datetime.now()
     for key, value in timeChecking.items():
         delay = (checkOn - value).seconds
         #print(key,':',delay)
-        if delay > 300: #přidat podmínku na vrácení se do online (když je offline, ale je menší jak 300)
+        if delay > 300:
             setOffline(key)
     Timer(10.0, checkTime).start()
 
@@ -90,12 +94,13 @@ def on_message(client, userdata, msg):
         blackAverage = sum(blackAll) / len(blackAll)
         blackMax = max(blackAll)
         blackMin = min(blackAll)
-        blackLastUpdate = blackDateAll[-1]
+        blackLastUpdate = createdOn
         raw.store_measurement(blackActual)
         print('Team:', teamName,'Actual:', blackActual,'Average:', blackAverage,'Max:', blackMax,'Min:', blackMin)
         print(blackDaysAll)
         store_to_txt(teamName, blackStatus, blackActual, blackAverage, blackMax, blackMin, blackLastUpdate)
     elif teamName == 'pink':
+        pinkStatus = 'online'
         if pinkDaysAll != []:
             if pinkDaysAll[-1] != createdOn.day:
                 pinkAll.clear()
@@ -111,6 +116,7 @@ def on_message(client, userdata, msg):
         print(pinkDaysAll)
         store_to_txt(teamName, pinkStatus, pinkActual, pinkAverage, pinkMax, pinkMin, pinkLastUpdate)
     elif teamName == 'yellow':
+        yellowStatus = 'online'
         if yellowDaysAll != []:
             if yellowDaysAll[-1] != createdOn.day:
                 yellowAll.clear()
@@ -126,6 +132,7 @@ def on_message(client, userdata, msg):
         print(yellowDaysAll)
         store_to_txt(teamName, yellowStatus, yellowActual, yellowAverage, yellowMax, yellowMin, yellowLastUpdate)
     elif teamName == 'orange':
+        orangeStatus = 'online'
         if orangeDaysAll != []:
             if orangeDaysAll[-1] != createdOn.day:
                 orangeAll.clear()
@@ -141,6 +148,7 @@ def on_message(client, userdata, msg):
         print(orangeDaysAll)
         store_to_txt(teamName, orangeStatus, orangeActual, orangeAverage, orangeMax, orangeMin, orangeLastUpdate)
     elif teamName == 'red':
+        redStatus = 'online'
         if redDaysAll != []:
             if redDaysAll[-1] != createdOn.day:
                 redAll.clear()
@@ -156,6 +164,7 @@ def on_message(client, userdata, msg):
         print(redDaysAll)
         store_to_txt(teamName, redStatus, redActual, redAverage, redMax, redMin, redLastUpdate)
     elif teamName == 'green':
+        greenStatus = 'online'
         if greenDaysAll != []:
             if greenDaysAll[-1] != createdOn.day:
                 greenAll.clear()
@@ -171,6 +180,7 @@ def on_message(client, userdata, msg):
         print(greenDaysAll)
         store_to_txt(teamName, greenStatus, greenActual, greenAverage, greenMax, greenMin, greenLastUpdate)
     elif teamName == 'blue':
+        blueStatus = 'online'
         if blueDaysAll != []:
             if blueDaysAll[-1] != createdOn.day:
                 blueAll.clear()
@@ -184,7 +194,6 @@ def on_message(client, userdata, msg):
         blueLastUpdate = createdOn
         print('Team:', teamName,'Actual:', blueActual,'Average:', blueAverage,'Max:', blueMax,'Min:', blueMin)
         print(blueDaysAll)
-        print('Black status: ', blackStatus)
         store_to_txt(teamName, blueStatus, blueActual, blueAverage, blueMax, blueMin, blueLastUpdate)
 
 def mainClient():
