@@ -83,7 +83,6 @@ def on_message(client, userdata, msg):
     timeChecking[str(teamName)] = datetime.datetime.now() #slovník časů posledních zpráv pro jednotlivé týmy
     if teamName == 'black':
         blackStatus = 'online'
-        Timer(2, setOffline()).start()
         if blackDaysAll != []:
             if blackDaysAll[-1] != createdOn.day:
                 blackAll.clear()
