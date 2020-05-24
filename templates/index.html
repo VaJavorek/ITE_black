@@ -3,39 +3,38 @@
 {% block content %}
     <div class="jumbotron">
         <p>Client status: <strong id="client_status"></strong></p>
-        
         <table width="100%">
             <tr>
                 <td>
                     <h1><small>Team name: </small><strong style="color:black">Black</strong></h1>
 
-                    <p>Status of sensor: <strong id="status_black" style="color:red">offline</strong></p>
+                    <p>Status of sensor: <strong id="status_black">{{data['black']['status']}}</strong></p>
 
                     <table weight="75%">
                         <tr>
                             <th>Actual temperature:</th>
                             <td>&nbsp;</td>
-                            <td align="center"><span id="actual_black">---</span> &deg;C</td>
+                            <td align="center"><span id="actual_black">{{data['black']['actual']}}</span> &deg;C</td>
                         </tr>
                         <tr>
                             <th>Average daily temperature:</th>
                             <td>&nbsp;</td>
-                            <td align="center"><span id="avg_black">---</span> &deg;C</td>
+                            <td align="center"><span id="avg_black">{{data['black']['average']}}</span> &deg;C</td>
                         </tr>
                         <tr>
                             <th>Maximal daily temperature:</th>
                             <td>&nbsp;</td>
-                            <td align="center"><span id="max_black">---</span> &deg;C</td>
+                            <td align="center"><span id="max_black">{{data['black']['max']}}</span> &deg;C</td>
                         </tr>
                         <tr>
                             <th>Minimal daily temperature:</th>
                             <td>&nbsp;</td>
-                            <td align="center"><span id="min_black">---</span> &deg;C</td>
+                            <td align="center"><span id="min_black">{{data['black']['min']}}</span> &deg;C</td>
                         </tr>
                         <tr>
                             <th>Last update:</th>
                             <td>&nbsp;</td>
-                            <td align="center" id="last_update_black"></td>
+                            <td align="center" id="last_update_black">{{data['black']['last_update']}}</td>
                         </tr>
                     </table>
                 </td>

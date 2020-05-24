@@ -10,10 +10,10 @@ var port = 9001
 var clientID = "WebPageClient"
 
 var blackAverage
-var blackAll = []
+var blackActual
 var blackMin
 var blackMax
-var blackSum = 0
+var blackLastUpdate
 
 var pinkAverage
 var pinkAll = []
@@ -76,19 +76,19 @@ function onMessageArrived(msg) {
             if (blackStatusElement.innerHTML == "online") {
                 blackStatusElement.style.color = "green"
                 blackActualElement.innerHTML = Math.round(json.temperature * 100) / 100
-                blackAll.push(json.temperature)
-                blackSum = blackSum + json.temperature
-                blackAverage = blackSum / blackAll.length
-                blackMin = Math.min.apply(Math, blackAll)
-                blackMax = Math.max.apply(Math, blackAll)
+                blackAverageElement.innerHTML = Math.round(((Number(blackAverageElement.innerHTML) + json.temperature) / 2.0)*100)/100
+                if (Number(blackMaxElement.innerHTML) < json.temperature) {
+                    blackMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
+                }
+                if (Number(blackMinElement.innerHTML) > json.temperature) {
+                    blackMinElement.innerHTML = Math.round(json.temperature * 100) / 100
+                }
             }
             else {
                 blackStatusElement.style.color = "red"
                 blackActualElement.innerHTML = '---'
             }
-            blackAverageElement.innerHTML = Math.round(blackAverage * 100) / 100
-            blackMaxElement.innerHTML = Math.round(blackMax * 100) / 100
-            blackMinElement.innerHTML = Math.round(blackMin * 100) / 100
+
             var d = new Date(json.created_on)
 
             if (d.getMinutes() < 10) {
@@ -105,7 +105,14 @@ function onMessageArrived(msg) {
                 var seconds = d.getSeconds()
             }
 
-            blackLastUpdateElement.innerHTML = d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
+            if ((d.getMonth()+1) < 10) {
+                var month = "0" + (d.getMonth()+1)
+            }
+            else {
+                var month = (d.getMonth()+1)
+            }
+
+            blackLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //blackLastUpdateElement.innerHTML = d
             setInterval(function () {
@@ -207,6 +214,17 @@ function MQTTconnect() {
         onFailure: onFailure,
         password: "pivo",
         userName: "mqtt_student"
+    }
+    document.getElementById("actual_black").innerHTML = Math.round(Number(document.getElementById("actual_black").innerHTML) * 100) / 100
+    document.getElementById("avg_black").innerHTML = Math.round(Number(document.getElementById("avg_black").innerHTML) * 100) / 100
+    document.getElementById("max_black").innerHTML = Math.round(Number(document.getElementById("max_black").innerHTML) * 100) / 100
+    document.getElementById("min_black").innerHTML = Math.round(Number(document.getElementById("min_black").innerHTML) * 100) / 100
+    if (document.getElementById("status_black").innerHTML == "offline") {
+        document.getElementById("status_black").style.color = "red"
+        document.getElementById("actual_black").innerHTML = "---"
+    }
+    else {
+        document.getElementById("status_black").style.color = "green"
     }
     mqtt.onMessageArrived = onMessageArrived
     mqtt.connect(options)

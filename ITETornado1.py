@@ -11,7 +11,23 @@ from threading import Timer, Thread
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('templates/index.html', title='Home Page', year=datetime.datetime.now().year, blackAll = blackAll, blackDaysAll = blackDaysAll, pinkAll = pinkAll)
+        data = {}
+        data['black'] = {}
+        data['pink'] = {}
+        data['yellow'] = {}
+        data['orange'] = {}
+        data['red'] = {}
+        data['green'] = {}
+        data['blue'] = {}
+        with open('save_black.txt', 'r') as black:
+            black_lines = black.readlines()
+        data['black']['status'] = black_lines[0]
+        data['black']['actual'] = black_lines[1]
+        data['black']['average'] = black_lines[2]
+        data['black']['max'] = black_lines[3]
+        data['black']['min'] = black_lines[4]
+        data['black']['last_update'] = black_lines[5]
+        self.render('templates/index.html', title='Home Page', year=datetime.datetime.now().year, data = data)
 
 #if __name__ == '__main__':
 #    main()
@@ -79,17 +95,18 @@ def on_message(client, userdata, msg):
     teamName = JSON['team_name']
     temperature = JSON['temperature']
     source = JSON['source']
-    createdOn = datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f')
+    createdOn = datetime.datetime.strftime(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f'), '%d.%m.%Y %H:%M:%S')
+
     timeChecking[str(teamName)] = datetime.datetime.now() #slovník časů posledních zpráv pro jednotlivé týmy
     if teamName == 'black':
         blackStatus = 'online'
         if blackDaysAll != []:
-            if blackDaysAll[-1] != createdOn.day:
+            if blackDaysAll[len(blackDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 blackAll.clear()
                 blackDaysAll.clear()
         blackActual = temperature
         blackAll.append(temperature)
-        blackDaysAll.append(createdOn.day)
+        blackDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
         blackAverage = sum(blackAll) / len(blackAll)
         blackMax = max(blackAll)
         blackMin = min(blackAll)
