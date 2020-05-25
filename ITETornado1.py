@@ -19,6 +19,7 @@ class MainHandler(tornado.web.RequestHandler):
         data['red'] = {}
         data['green'] = {}
         data['blue'] = {}
+        
         with open('save_black.txt', 'r') as black:
             black_lines = black.readlines()
         data['black']['status'] = black_lines[0]
@@ -27,6 +28,75 @@ class MainHandler(tornado.web.RequestHandler):
         data['black']['max'] = black_lines[3]
         data['black']['min'] = black_lines[4]
         data['black']['last_update'] = black_lines[5]
+        data['black']['sum'] = black_lines[6]
+        data['black']['count'] = black_lines[7]
+
+        with open('save_pink.txt', 'r') as pink:
+            pink_lines = pink.readlines()
+        data['pink']['status'] = pink_lines[0]
+        data['pink']['actual'] = pink_lines[1]
+        data['pink']['average'] = pink_lines[2]
+        data['pink']['max'] = pink_lines[3]
+        data['pink']['min'] = pink_lines[4]
+        data['pink']['last_update'] = pink_lines[5]
+        data['pink']['sum'] = pink_lines[6]
+        data['pink']['count'] = pink_lines[7]
+
+        with open('save_yellow.txt', 'r') as yellow:
+            yellow_lines = yellow.readlines()
+        data['yellow']['status'] = yellow_lines[0]
+        data['yellow']['actual'] = yellow_lines[1]
+        data['yellow']['average'] = yellow_lines[2]
+        data['yellow']['max'] = yellow_lines[3]
+        data['yellow']['min'] = yellow_lines[4]
+        data['yellow']['last_update'] = yellow_lines[5]
+        data['yellow']['sum'] = yellow_lines[6]
+        data['yellow']['count'] = yellow_lines[7]
+
+        with open('save_orange.txt', 'r') as orange:
+            orange_lines = orange.readlines()
+        data['orange']['status'] = orange_lines[0]
+        data['orange']['actual'] = orange_lines[1]
+        data['orange']['average'] = orange_lines[2]
+        data['orange']['max'] = orange_lines[3]
+        data['orange']['min'] = orange_lines[4]
+        data['orange']['last_update'] = orange_lines[5]
+        data['orange']['sum'] = orange_lines[6]
+        data['orange']['count'] = orange_lines[7]
+
+        with open('save_red.txt', 'r') as red:
+            red_lines = red.readlines()
+        data['red']['status'] = red_lines[0]
+        data['red']['actual'] = red_lines[1]
+        data['red']['average'] = red_lines[2]
+        data['red']['max'] = red_lines[3]
+        data['red']['min'] = red_lines[4]
+        data['red']['last_update'] = red_lines[5]
+        data['red']['sum'] = red_lines[6]
+        data['red']['count'] = red_lines[7]
+
+        with open('save_green.txt', 'r') as green:
+            green_lines = green.readlines()
+        data['green']['status'] = green_lines[0]
+        data['green']['actual'] = green_lines[1]
+        data['green']['average'] = green_lines[2]
+        data['green']['max'] = green_lines[3]
+        data['green']['min'] = green_lines[4]
+        data['green']['last_update'] = green_lines[5]
+        data['green']['sum'] = green_lines[6]
+        data['green']['count'] = green_lines[7]
+
+        with open('save_blue.txt', 'r') as blue:
+            blue_lines = blue.readlines()
+        data['blue']['status'] = blue_lines[0]
+        data['blue']['actual'] = blue_lines[1]
+        data['blue']['average'] = blue_lines[2]
+        data['blue']['max'] = blue_lines[3]
+        data['blue']['min'] = blue_lines[4]
+        data['blue']['last_update'] = blue_lines[5]
+        data['blue']['sum'] = blue_lines[6]
+        data['blue']['count'] = blue_lines[7]
+
         self.render('templates/index.html', title='Home Page', year=datetime.datetime.now().year, data = data)
 
 #if __name__ == '__main__':
@@ -121,12 +191,12 @@ def on_message(client, userdata, msg):
     elif teamName == 'pink':
         pinkStatus = 'online'
         if pinkDaysAll != []:
-            if pinkDaysAll[-1] != createdOn.day:
+            if pinkDaysAll[len(pinkDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 pinkAll.clear()
                 pinkDaysAll.clear()
         pinkActual = temperature
         pinkAll.append(temperature)
-        pinkDaysAll.append(createdOn.day)
+        pinkDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
         pinkAverage = sum(pinkAll) / len(pinkAll)
         pinkMax = max(pinkAll)
         pinkMin = min(pinkAll)
@@ -137,12 +207,12 @@ def on_message(client, userdata, msg):
     elif teamName == 'yellow':
         yellowStatus = 'online'
         if yellowDaysAll != []:
-            if yellowDaysAll[-1] != createdOn.day:
+            if yellowDaysAll[len(yellowDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 yellowAll.clear()
                 yellowDaysAll.clear()
         yellowActual = temperature
         yellowAll.append(temperature)
-        yellowDaysAll.append(createdOn.day)
+        yellowDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
         yellowAverage = sum(yellowAll) / len(yellowAll)
         yellowMax = max(yellowAll)
         yellowMin = min(yellowAll)
@@ -153,12 +223,12 @@ def on_message(client, userdata, msg):
     elif teamName == 'orange':
         orangeStatus = 'online'
         if orangeDaysAll != []:
-            if orangeDaysAll[-1] != createdOn.day:
+            if orangeDaysAll[len(orangeDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 orangeAll.clear()
                 orangeDaysAll.clear()
         orangeActual = temperature
         orangeAll.append(temperature)
-        orangeDaysAll.append(createdOn.day)
+        orangeDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
         orangeAverage = sum(orangeAll) / len(orangeAll)
         orangeMax = max(orangeAll)
         orangeMin = min(orangeAll)
@@ -169,12 +239,12 @@ def on_message(client, userdata, msg):
     elif teamName == 'red':
         redStatus = 'online'
         if redDaysAll != []:
-            if redDaysAll[-1] != createdOn.day:
+            if redDaysAll[len(redDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 redAll.clear()
                 redDaysAll.clear()
         redActual = temperature
         redAll.append(temperature)
-        redDaysAll.append(createdOn.day)
+        redDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
         redAverage = sum(redAll) / len(redAll)
         redMax = max(redAll)
         redMin = min(redAll)
@@ -185,12 +255,12 @@ def on_message(client, userdata, msg):
     elif teamName == 'green':
         greenStatus = 'online'
         if greenDaysAll != []:
-            if greenDaysAll[-1] != createdOn.day:
+            if greenDaysAll[len(greenDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 greenAll.clear()
                 greenDaysAll.clear()
         greenActual = temperature
         greenAll.append(temperature)
-        greenDaysAll.append(createdOn.day)
+        greenDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
         greenAverage = sum(greenAll) / len(greenAll)
         greenMax = max(greenAll)
         greenMin = min(greenAll)
@@ -201,12 +271,12 @@ def on_message(client, userdata, msg):
     elif teamName == 'blue':
         blueStatus = 'online'
         if blueDaysAll != []:
-            if blueDaysAll[-1] != createdOn.day:
+            if blueDaysAll[len(blueDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 blueAll.clear()
                 blueDaysAll.clear()
         blueActual = temperature
         blueAll.append(temperature)
-        blueDaysAll.append(createdOn.day)
+        blueDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
         blueAverage = sum(blueAll) / len(blueAll)
         blueMax = max(blueAll)
         blueMin = min(blueAll)
