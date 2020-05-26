@@ -99,13 +99,6 @@ class MainHandler(tornado.web.RequestHandler):
 
         self.render('templates/index.html', title='Home Page', year=datetime.datetime.now().year, data = data)
 
-#if __name__ == '__main__':
-#    main()
-#    app = TornadoApplication([(r'/', MainHandler),(r'/(.*)', StaticFileHandler, {
-#            'path': join_path(dirname(__file__), 'static')})])
-#    app.listen(8889)
-#    tornado.ioloop.IOLoop.current().start()
-
 SERVER = '147.228.124.230'  # RPi
 TOPIC = 'ite/#'
 
@@ -295,15 +288,13 @@ def mainClient():
     client.connect(SERVER, 1883, 60)
     client.subscribe(TOPIC)
     print("Subscribed to:",TOPIC)
-    #app = TornadoApplication([(r'/', MainHandler),(r'/(.*)', StaticFileHandler, {
-    #        'path': join_path(dirname(__file__), 'static')})])
-    #app.listen(8889)
+
     client.loop_forever()
 
 def mainWebserver():
     app = TornadoApplication([(r'/', MainHandler),(r'/(.*)', StaticFileHandler, {
             'path': join_path(dirname(__file__), 'static')})])
-    app.listen(8889)
+    app.listen(80)
     f1 = tornado.ioloop.IOLoop.current().start()
     t1 = Thread(target = f1)
     t1.start()
