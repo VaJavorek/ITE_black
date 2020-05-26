@@ -45,7 +45,7 @@ def store_measurement(temp):
 
     # create alert
     lowTemp = 0.0
-    highTemp = 30.0
+    highTemp = 25.0
     if temp < lowTemp or temp > highTemp:
         url_alerts = url_base+'/alerts'
         headers_alerts = headers_sensors
