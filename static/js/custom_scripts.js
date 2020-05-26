@@ -77,8 +77,11 @@ function onMessageArrived(msg) {
             if (blackStatusElement.innerHTML == "online") {
                 blackStatusElement.style.color = "green"
                 blackActualElement.innerHTML = Math.round(json.temperature * 100) / 100
-                if ((json.temperature < 0) || (json.temperature > 30)) {
+                if ((json.temperature < 0) || (json.temperature > 25)) {
                     blackActualElement.style.color = "red"
+                }
+                else {
+                    blackActualElement.style.color = "black"
                 }
                 if (Number(blackMaxElement.innerHTML) < json.temperature) {
                     blackMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -140,6 +143,12 @@ function onMessageArrived(msg) {
             if (pinkStatusElement.innerHTML == "online") {
                 pinkStatusElement.style.color = "green"
                 pinkActualElement.innerHTML = Math.round(json.temperature * 100) / 100
+                if ((json.temperature < 0) || (json.temperature > 25)) {
+                    pinkActualElement.style.color = "red"
+                }
+                else {
+                    pinkActualElement.style.color = "black"
+                }
                 if (Number(pinkMaxElement.innerHTML) < json.temperature) {
                     pinkMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
                 }
@@ -200,6 +209,12 @@ function onMessageArrived(msg) {
             if (yellowStatusElement.innerHTML == "online") {
                 yellowStatusElement.style.color = "green"
                 yellowActualElement.innerHTML = Math.round(json.temperature * 100) / 100
+                if ((json.temperature < 0) || (json.temperature > 25)) {
+                    yellowActualElement.style.color = "red"
+                }
+                else {
+                    yellowActualElement.style.color = "black"
+                }
                 if (Number(yellowMaxElement.innerHTML) < json.temperature) {
                     yellowMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
                 }
@@ -260,6 +275,12 @@ function onMessageArrived(msg) {
             if (orangeStatusElement.innerHTML == "online") {
                 orangeStatusElement.style.color = "green"
                 orangeActualElement.innerHTML = Math.round(json.temperature * 100) / 100
+                if ((json.temperature < 0) || (json.temperature > 25)) {
+                    orangeActualElement.style.color = "red"
+                }
+                else {
+                    orangeActualElement.style.color = "black"
+                }
                 if (Number(orangeMaxElement.innerHTML) < json.temperature) {
                     orangeMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
                 }
@@ -320,6 +341,12 @@ function onMessageArrived(msg) {
             if (redStatusElement.innerHTML == "online") {
                 redStatusElement.style.color = "green"
                 redActualElement.innerHTML = Math.round(json.temperature * 100) / 100
+                if ((json.temperature < 0) || (json.temperature > 25)) {
+                    redActualElement.style.color = "red"
+                }
+                else {
+                    redActualElement.style.color = "black"
+                }
                 if (Number(redMaxElement.innerHTML) < json.temperature) {
                     redMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
                 }
@@ -380,6 +407,12 @@ function onMessageArrived(msg) {
             if (greenStatusElement.innerHTML == "online") {
                 greenStatusElement.style.color = "green"
                 greenActualElement.innerHTML = Math.round(json.temperature * 100) / 100
+                if ((json.temperature < 0) || (json.temperature > 25)) {
+                    greenActualElement.style.color = "red"
+                }
+                else {
+                    greenActualElement.style.color = "black"
+                }
                 if (Number(greenMaxElement.innerHTML) < json.temperature) {
                     greenMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
                 }
@@ -440,6 +473,12 @@ function onMessageArrived(msg) {
             if (blueStatusElement.innerHTML == "online") {
                 blueStatusElement.style.color = "green"
                 blueActualElement.innerHTML = Math.round(json.temperature * 100) / 100
+                if ((json.temperature < 0) || (json.temperature > 25)) {
+                    blueActualElement.style.color = "red"
+                }
+                else {
+                    blueActualElement.style.color = "black"
+                }
                 if (Number(blueMaxElement.innerHTML) < json.temperature) {
                     blueMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
                 }
@@ -516,7 +555,7 @@ function MQTTconnect() {
         userName: "mqtt_student"
     }
     document.getElementById("actual_black").innerHTML = Math.round(Number(document.getElementById("actual_black").innerHTML) * 100) / 100
-    if ((Number(document.getElementById("actual_black").innerHTML)) < 0 || (Number(document.getElementById("actual_black")) > 30)) {
+    if ((Number(document.getElementById("actual_black").innerHTML)) < 0 || (Number(document.getElementById("actual_black")) > 25)) {
         document.getElementById("actual_black").style.color = "red"
     }
     document.getElementById("avg_black").innerHTML = Math.round(Number(document.getElementById("avg_black").innerHTML) * 100) / 100
@@ -531,6 +570,9 @@ function MQTTconnect() {
     }
 
     document.getElementById("actual_pink").innerHTML = Math.round(Number(document.getElementById("actual_pink").innerHTML) * 100) / 100
+    if ((Number(document.getElementById("actual_pink").innerHTML)) < 0 || (Number(document.getElementById("actual_pink")) > 25)) {
+        document.getElementById("actual_pink").style.color = "red"
+    }
     document.getElementById("avg_pink").innerHTML = Math.round(Number(document.getElementById("avg_pink").innerHTML) * 100) / 100
     document.getElementById("max_pink").innerHTML = Math.round(Number(document.getElementById("max_pink").innerHTML) * 100) / 100
     document.getElementById("min_pink").innerHTML = Math.round(Number(document.getElementById("min_pink").innerHTML) * 100) / 100
@@ -543,6 +585,9 @@ function MQTTconnect() {
     }
 
     document.getElementById("actual_yellow").innerHTML = Math.round(Number(document.getElementById("actual_yellow").innerHTML) * 100) / 100
+    if ((Number(document.getElementById("actual_yellow").innerHTML)) < 0 || (Number(document.getElementById("actual_yellow")) > 25)) {
+        document.getElementById("actual_yellow").style.color = "red"
+    }
     document.getElementById("avg_yellow").innerHTML = Math.round(Number(document.getElementById("avg_yellow").innerHTML) * 100) / 100
     document.getElementById("max_yellow").innerHTML = Math.round(Number(document.getElementById("max_yellow").innerHTML) * 100) / 100
     document.getElementById("min_yellow").innerHTML = Math.round(Number(document.getElementById("min_yellow").innerHTML) * 100) / 100
@@ -555,6 +600,9 @@ function MQTTconnect() {
     }
 
     document.getElementById("actual_orange").innerHTML = Math.round(Number(document.getElementById("actual_orange").innerHTML) * 100) / 100
+    if ((Number(document.getElementById("actual_orange").innerHTML)) < 0 || (Number(document.getElementById("actual_orange")) > 25)) {
+        document.getElementById("actual_orange").style.color = "red"
+    }
     document.getElementById("avg_orange").innerHTML = Math.round(Number(document.getElementById("avg_orange").innerHTML) * 100) / 100
     document.getElementById("max_orange").innerHTML = Math.round(Number(document.getElementById("max_orange").innerHTML) * 100) / 100
     document.getElementById("min_orange").innerHTML = Math.round(Number(document.getElementById("min_orange").innerHTML) * 100) / 100
@@ -567,6 +615,9 @@ function MQTTconnect() {
     }
 
     document.getElementById("actual_red").innerHTML = Math.round(Number(document.getElementById("actual_red").innerHTML) * 100) / 100
+    if ((Number(document.getElementById("actual_red").innerHTML)) < 0 || (Number(document.getElementById("actual_red")) > 25)) {
+        document.getElementById("actual_red").style.color = "red"
+    }
     document.getElementById("avg_red").innerHTML = Math.round(Number(document.getElementById("avg_red").innerHTML) * 100) / 100
     document.getElementById("max_red").innerHTML = Math.round(Number(document.getElementById("max_red").innerHTML) * 100) / 100
     document.getElementById("min_red").innerHTML = Math.round(Number(document.getElementById("min_red").innerHTML) * 100) / 100
@@ -579,6 +630,9 @@ function MQTTconnect() {
     }
 
     document.getElementById("actual_green").innerHTML = Math.round(Number(document.getElementById("actual_green").innerHTML) * 100) / 100
+    if ((Number(document.getElementById("actual_green").innerHTML)) < 0 || (Number(document.getElementById("actual_green")) > 25)) {
+        document.getElementById("actual_green").style.color = "red"
+    }
     document.getElementById("avg_green").innerHTML = Math.round(Number(document.getElementById("avg_green").innerHTML) * 100) / 100
     document.getElementById("max_green").innerHTML = Math.round(Number(document.getElementById("max_green").innerHTML) * 100) / 100
     document.getElementById("min_green").innerHTML = Math.round(Number(document.getElementById("min_green").innerHTML) * 100) / 100
@@ -591,6 +645,9 @@ function MQTTconnect() {
     }
 
     document.getElementById("actual_blue").innerHTML = Math.round(Number(document.getElementById("actual_blue").innerHTML) * 100) / 100
+    if ((Number(document.getElementById("actual_blue").innerHTML)) < 0 || (Number(document.getElementById("actual_blue")) > 25)) {
+        document.getElementById("actual_blue").style.color = "red"
+    }
     document.getElementById("avg_blue").innerHTML = Math.round(Number(document.getElementById("avg_blue").innerHTML) * 100) / 100
     document.getElementById("max_blue").innerHTML = Math.round(Number(document.getElementById("max_blue").innerHTML) * 100) / 100
     document.getElementById("min_blue").innerHTML = Math.round(Number(document.getElementById("min_blue").innerHTML) * 100) / 100
