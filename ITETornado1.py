@@ -179,7 +179,6 @@ def on_message(client, userdata, msg):
         blackLastUpdate = createdOn
         raw.store_measurement(blackActual)
         print('Team:', teamName,'Actual:', blackActual,'Average:', blackAverage,'Max:', blackMax,'Min:', blackMin)
-        print(blackDaysAll)
         store_to_txt(teamName, blackStatus, blackActual, blackAverage, blackMax, blackMin, blackLastUpdate, sum(blackAll), len(blackAll))
     elif teamName == 'pink':
         pinkStatus = 'online'
@@ -195,7 +194,6 @@ def on_message(client, userdata, msg):
         pinkMin = min(pinkAll)
         pinkLastUpdate = createdOn
         print('Team:', teamName,'Actual:', pinkActual,'Average:', pinkAverage,'Max:', pinkMax,'Min:', pinkMin)
-        print(pinkDaysAll)
         store_to_txt(teamName, pinkStatus, pinkActual, pinkAverage, pinkMax, pinkMin, pinkLastUpdate, sum(pinkAll), len(pinkAll))
     elif teamName == 'yellow':
         yellowStatus = 'online'
@@ -211,7 +209,6 @@ def on_message(client, userdata, msg):
         yellowMin = min(yellowAll)
         yellowLastUpdate = createdOn
         print('Team:', teamName,'Actual:', yellowActual,'Average:', yellowAverage,'Max:', yellowMax,'Min:', yellowMin)
-        print(yellowDaysAll)
         store_to_txt(teamName, yellowStatus, yellowActual, yellowAverage, yellowMax, yellowMin, yellowLastUpdate, sum(yellowAll), len(yellowAll))
     elif teamName == 'orange':
         orangeStatus = 'online'
@@ -227,7 +224,6 @@ def on_message(client, userdata, msg):
         orangeMin = min(orangeAll)
         orangeLastUpdate = createdOn
         print('Team:', teamName,'Actual:', orangeActual,'Average:', orangeAverage,'Max:', orangeMax,'Min:', orangeMin)
-        print(orangeDaysAll)
         store_to_txt(teamName, orangeStatus, orangeActual, orangeAverage, orangeMax, orangeMin, orangeLastUpdate, sum(orangeAll), len(orangeAll))
     elif teamName == 'red':
         redStatus = 'online'
@@ -243,7 +239,6 @@ def on_message(client, userdata, msg):
         redMin = min(redAll)
         redLastUpdate = createdOn
         print('Team:', teamName,'Actual:', redActual,'Average:', redAverage,'Max:', redMax,'Min:', redMin)
-        print(redDaysAll)
         store_to_txt(teamName, redStatus, redActual, redAverage, redMax, redMin, redLastUpdate, sum(redAll), len(redAll))
     elif teamName == 'green':
         greenStatus = 'online'
@@ -259,7 +254,6 @@ def on_message(client, userdata, msg):
         greenMin = min(greenAll)
         greenLastUpdate = createdOn
         print('Team:', teamName,'Actual:', greenActual,'Average:', greenAverage,'Max:', greenMax,'Min:', greenMin)
-        print(greenDaysAll)
         store_to_txt(teamName, greenStatus, greenActual, greenAverage, greenMax, greenMin, greenLastUpdate, sum(greenAll), len(greenAll))
     elif teamName == 'blue':
         blueStatus = 'online'
@@ -275,7 +269,6 @@ def on_message(client, userdata, msg):
         blueMin = min(blueAll)
         blueLastUpdate = createdOn
         print('Team:', teamName,'Actual:', blueActual,'Average:', blueAverage,'Max:', blueMax,'Min:', blueMin)
-        print(blueDaysAll)
         store_to_txt(teamName, blueStatus, blueActual, blueAverage, blueMax, blueMin, blueLastUpdate, sum(blueAll), len(blueAll))
 
 def mainClient():
