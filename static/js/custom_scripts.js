@@ -14,42 +14,49 @@ var blackActual
 var blackMin
 var blackMax
 var blackLastUpdate
+var blackInterval
 
 var pinkAverage
 var pinkAll = []
 var pinkMin
 var pinkMax
 var pinkSum = 0
+var pinkInterval
 
 var yellowAverage
 var yellowAll = []
 var yellowMin
 var yellowMax
 var yellowSum = 0
+var yellowInterval
 
 var orangeAverage
 var orangeAll = []
 var orangeMin
 var orangeMax
 var orangeSum = 0
+var orangeInterval
 
 var redAverage
 var redAll = []
 var redMin
 var redMax
 var redSum = 0
+var redInterval
 
 var greenAverage
 var greenAll = []
 var greenMin
 var greenMax
 var greenSum = 0
+var greenInterval
 
 var blueAverage
 var blueAll = []
 var blueMin
 var blueMax
 var blueSum = 0
+var blueInterval
 
 
 function onFailure(message) {
@@ -81,7 +88,7 @@ function onMessageArrived(msg) {
                     blackActualElement.style.color = "red"
                 }
                 else {
-                    blackActualElement.style.color = "black"
+                    blackActualElement.style.color = ""
                 }
                 if (Number(blackMaxElement.innerHTML) < json.temperature) {
                     blackMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -124,7 +131,8 @@ function onMessageArrived(msg) {
             blackLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //blackLastUpdateElement.innerHTML = d
-            setInterval(function () {
+            clearInterval(blackInterval)
+            blackInterval = setInterval(function () {
                 blackStatusElement.innerHTML = "offline";
                 blackStatusElement.style.color = "red";
                 blackActualElement.innerHTML = "---";
@@ -147,7 +155,7 @@ function onMessageArrived(msg) {
                     pinkActualElement.style.color = "red"
                 }
                 else {
-                    pinkActualElement.style.color = "black"
+                    pinkActualElement.style.color = ""
                 }
                 if (Number(pinkMaxElement.innerHTML) < json.temperature) {
                     pinkMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -190,7 +198,8 @@ function onMessageArrived(msg) {
             pinkLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //pinkLastUpdateElement.innerHTML = d
-            setInterval(function () {
+            clearInterval(pinkInterval)
+            pinkInterval = setInterval(function () {
                 pinkStatusElement.innerHTML = "offline";
                 pinkStatusElement.style.color = "red";
                 pinkActualElement.innerHTML = "---";
@@ -213,7 +222,7 @@ function onMessageArrived(msg) {
                     yellowActualElement.style.color = "red"
                 }
                 else {
-                    yellowActualElement.style.color = "black"
+                    yellowActualElement.style.color = ""
                 }
                 if (Number(yellowMaxElement.innerHTML) < json.temperature) {
                     yellowMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -256,7 +265,8 @@ function onMessageArrived(msg) {
             yellowLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //yellowLastUpdateElement.innerHTML = d
-            setInterval(function () {
+            clearInterval(yellowInterval)
+            yellowInterval = setInterval(function () {
                 yellowStatusElement.innerHTML = "offline";
                 yellowStatusElement.style.color = "red";
                 yellowActualElement.innerHTML = "---";
@@ -279,7 +289,7 @@ function onMessageArrived(msg) {
                     orangeActualElement.style.color = "red"
                 }
                 else {
-                    orangeActualElement.style.color = "black"
+                    orangeActualElement.style.color = ""
                 }
                 if (Number(orangeMaxElement.innerHTML) < json.temperature) {
                     orangeMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -322,7 +332,8 @@ function onMessageArrived(msg) {
             orangeLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //orangeLastUpdateElement.innerHTML = d
-            setInterval(function () {
+            clearInterval(orangeInterval)
+            orangeInterval = setInterval(function () {
                 orangeStatusElement.innerHTML = "offline";
                 orangeStatusElement.style.color = "red";
                 orangeActualElement.innerHTML = "---";
@@ -345,7 +356,7 @@ function onMessageArrived(msg) {
                     redActualElement.style.color = "red"
                 }
                 else {
-                    redActualElement.style.color = "black"
+                    redActualElement.style.color = ""
                 }
                 if (Number(redMaxElement.innerHTML) < json.temperature) {
                     redMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -388,7 +399,8 @@ function onMessageArrived(msg) {
             redLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //redLastUpdateElement.innerHTML = d
-            setInterval(function () {
+            clearInterval(redInterval)
+            redInterval = setInterval(function () {
                 redStatusElement.innerHTML = "offline";
                 redStatusElement.style.color = "red";
                 redActualElement.innerHTML = "---";
@@ -411,7 +423,7 @@ function onMessageArrived(msg) {
                     greenActualElement.style.color = "red"
                 }
                 else {
-                    greenActualElement.style.color = "black"
+                    greenActualElement.style.color = ""
                 }
                 if (Number(greenMaxElement.innerHTML) < json.temperature) {
                     greenMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -454,7 +466,8 @@ function onMessageArrived(msg) {
             greenLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //greenLastUpdateElement.innerHTML = d
-            setInterval(function () {
+            clearInterval(greenInterval)
+            greenInterval = setInterval(function () {
                 greenStatusElement.innerHTML = "offline";
                 greenStatusElement.style.color = "red";
                 greenActualElement.innerHTML = "---";
@@ -477,7 +490,7 @@ function onMessageArrived(msg) {
                     blueActualElement.style.color = "red"
                 }
                 else {
-                    blueActualElement.style.color = "black"
+                    blueActualElement.style.color = ""
                 }
                 if (Number(blueMaxElement.innerHTML) < json.temperature) {
                     blueMaxElement.innerHTML = Math.round(json.temperature * 100) / 100
@@ -520,7 +533,8 @@ function onMessageArrived(msg) {
             blueLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             //blueLastUpdateElement.innerHTML = d
-            setInterval(function () {
+            clearInterval(blueInterval)
+            blueInterval = setInterval(function () {
                 blueStatusElement.innerHTML = "offline";
                 blueStatusElement.style.color = "red";
                 blueActualElement.innerHTML = "---";
@@ -567,6 +581,11 @@ function MQTTconnect() {
     }
     else {
         document.getElementById("status_black").style.color = "green"
+        blackInterval = setInterval(function () {
+            document.getElementById("status_black").innerHTML = "offline";
+            document.getElementById("status_black").style.color = "red";
+            document.getElementById("actual_black").innerHTML = "---";
+        }, 300000)
     }
 
     document.getElementById("actual_pink").innerHTML = Math.round(Number(document.getElementById("actual_pink").innerHTML) * 100) / 100
@@ -582,6 +601,11 @@ function MQTTconnect() {
     }
     else {
         document.getElementById("status_pink").style.color = "green"
+        pinkInterval = setInterval(function () {
+            document.getElementById("status_pink").innerHTML = "offline";
+            document.getElementById("status_pink").style.color = "red";
+            document.getElementById("actual_pink").innerHTML = "---";
+        }, 300000)
     }
 
     document.getElementById("actual_yellow").innerHTML = Math.round(Number(document.getElementById("actual_yellow").innerHTML) * 100) / 100
@@ -597,6 +621,11 @@ function MQTTconnect() {
     }
     else {
         document.getElementById("status_yellow").style.color = "green"
+        yellowInterval = setInterval(function () {
+            document.getElementById("status_yellow").innerHTML = "offline";
+            document.getElementById("status_yellow").style.color = "red";
+            document.getElementById("actual_yellow").innerHTML = "---";
+        }, 300000)
     }
 
     document.getElementById("actual_orange").innerHTML = Math.round(Number(document.getElementById("actual_orange").innerHTML) * 100) / 100
@@ -612,6 +641,11 @@ function MQTTconnect() {
     }
     else {
         document.getElementById("status_orange").style.color = "green"
+        orangeInterval = setInterval(function () {
+            document.getElementById("status_orange").innerHTML = "offline";
+            document.getElementById("status_orange").style.color = "red";
+            document.getElementById("actual_orange").innerHTML = "---";
+        }, 300000)
     }
 
     document.getElementById("actual_red").innerHTML = Math.round(Number(document.getElementById("actual_red").innerHTML) * 100) / 100
@@ -627,6 +661,11 @@ function MQTTconnect() {
     }
     else {
         document.getElementById("status_red").style.color = "green"
+        redInterval = setInterval(function () {
+            document.getElementById("status_red").innerHTML = "offline";
+            document.getElementById("status_red").style.color = "red";
+            document.getElementById("actual_red").innerHTML = "---";
+        }, 300000)
     }
 
     document.getElementById("actual_green").innerHTML = Math.round(Number(document.getElementById("actual_green").innerHTML) * 100) / 100
@@ -642,6 +681,11 @@ function MQTTconnect() {
     }
     else {
         document.getElementById("status_green").style.color = "green"
+        greenInterval = setInterval(function () {
+            document.getElementById("status_green").innerHTML = "offline";
+            document.getElementById("status_green").style.color = "red";
+            document.getElementById("actual_green").innerHTML = "---";
+        }, 300000)
     }
 
     document.getElementById("actual_blue").innerHTML = Math.round(Number(document.getElementById("actual_blue").innerHTML) * 100) / 100
@@ -657,6 +701,11 @@ function MQTTconnect() {
     }
     else {
         document.getElementById("status_blue").style.color = "green"
+        blueInterval = setInterval(function () {
+                                document.getElementById("status_blue").innerHTML = "offline";
+                                document.getElementById("status_blue").style.color = "red";
+                                document.getElementById("actual_blue").innerHTML = "---";
+                            }, 300000)
     }
 
     mqtt.onMessageArrived = onMessageArrived
