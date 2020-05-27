@@ -39,7 +39,7 @@ def store_measurement(temp):
     date_time[1] = date_time[1][:-3]+"+02:00"
     createdOn = date_time[0]+'T'+date_time[1]
 
-    body_measurements = {'createdOn': createdOn, 'sensorUUID': sensorUUID, 'temperature': str(temp), 'status': 'TEST', 'timestamp': 1576498800000}
+    body_measurements = {'createdOn': createdOn, 'sensorUUID': sensorUUID, 'temperature': str(temp), 'status': 'OK', 'timestamp': 1576498800000}
     requests.post(url_measurements, data=dumps_json(body_measurements), headers=headers_measurements)
     #print('Measurement uploaded.')
 
