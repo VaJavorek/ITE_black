@@ -148,7 +148,7 @@ def checkTime():
     for key, value in timeChecking.items():
         delay = (checkOn - value).seconds
         #print(key,':',delay)
-        if delay > 300:
+        if delay > 60:
             setOffline(key)
     Timer(10.0, checkTime).start()
 
