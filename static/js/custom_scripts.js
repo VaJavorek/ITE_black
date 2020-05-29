@@ -136,7 +136,7 @@ function onMessageArrived(msg) {
                 blackStatusElement.innerHTML = "offline";
                 blackStatusElement.style.color = "red";
                 blackActualElement.innerHTML = "---";
-            }, 300000)
+            }, 60000)
             break;
         case "pink":
             var pinkStatusElement = document.getElementById("status_pink")
@@ -203,7 +203,7 @@ function onMessageArrived(msg) {
                 pinkStatusElement.innerHTML = "offline";
                 pinkStatusElement.style.color = "red";
                 pinkActualElement.innerHTML = "---";
-            }, 300000)
+            }, 60000)
             break;
         case "yellow":
             var yellowStatusElement = document.getElementById("status_yellow")
@@ -270,7 +270,7 @@ function onMessageArrived(msg) {
                 yellowStatusElement.innerHTML = "offline";
                 yellowStatusElement.style.color = "red";
                 yellowActualElement.innerHTML = "---";
-            }, 300000)
+            }, 60000)
             break;
         case "orange":
             var orangeStatusElement = document.getElementById("status_orange")
@@ -337,7 +337,7 @@ function onMessageArrived(msg) {
                 orangeStatusElement.innerHTML = "offline";
                 orangeStatusElement.style.color = "red";
                 orangeActualElement.innerHTML = "---";
-            }, 300000)
+            }, 60000)
             break;
         case "red":
             var redStatusElement = document.getElementById("status_red")
@@ -404,7 +404,7 @@ function onMessageArrived(msg) {
                 redStatusElement.innerHTML = "offline";
                 redStatusElement.style.color = "red";
                 redActualElement.innerHTML = "---";
-            }, 300000)
+            }, 60000)
             break;
         case "green":
             var greenStatusElement = document.getElementById("status_green")
@@ -471,7 +471,7 @@ function onMessageArrived(msg) {
                 greenStatusElement.innerHTML = "offline";
                 greenStatusElement.style.color = "red";
                 greenActualElement.innerHTML = "---";
-            }, 300000)
+            }, 60000)
             break;
         case "blue":
             var blueStatusElement = document.getElementById("status_blue")
@@ -538,7 +538,7 @@ function onMessageArrived(msg) {
                 blueStatusElement.innerHTML = "offline";
                 blueStatusElement.style.color = "red";
                 blueActualElement.innerHTML = "---";
-            }, 300000)
+            }, 60000)
             break;
     }
 }
@@ -585,7 +585,7 @@ function MQTTconnect() {
             document.getElementById("status_black").innerHTML = "offline";
             document.getElementById("status_black").style.color = "red";
             document.getElementById("actual_black").innerHTML = "---";
-        }, 300000)
+        }, 60000)
     }
 
     document.getElementById("actual_pink").innerHTML = Math.round(Number(document.getElementById("actual_pink").innerHTML) * 100) / 100
@@ -605,7 +605,7 @@ function MQTTconnect() {
             document.getElementById("status_pink").innerHTML = "offline";
             document.getElementById("status_pink").style.color = "red";
             document.getElementById("actual_pink").innerHTML = "---";
-        }, 300000)
+        }, 60000)
     }
 
     document.getElementById("actual_yellow").innerHTML = Math.round(Number(document.getElementById("actual_yellow").innerHTML) * 100) / 100
@@ -625,7 +625,7 @@ function MQTTconnect() {
             document.getElementById("status_yellow").innerHTML = "offline";
             document.getElementById("status_yellow").style.color = "red";
             document.getElementById("actual_yellow").innerHTML = "---";
-        }, 300000)
+        }, 60000)
     }
 
     document.getElementById("actual_orange").innerHTML = Math.round(Number(document.getElementById("actual_orange").innerHTML) * 100) / 100
@@ -645,7 +645,7 @@ function MQTTconnect() {
             document.getElementById("status_orange").innerHTML = "offline";
             document.getElementById("status_orange").style.color = "red";
             document.getElementById("actual_orange").innerHTML = "---";
-        }, 300000)
+        }, 60000)
     }
 
     document.getElementById("actual_red").innerHTML = Math.round(Number(document.getElementById("actual_red").innerHTML) * 100) / 100
@@ -665,7 +665,7 @@ function MQTTconnect() {
             document.getElementById("status_red").innerHTML = "offline";
             document.getElementById("status_red").style.color = "red";
             document.getElementById("actual_red").innerHTML = "---";
-        }, 300000)
+        }, 60000)
     }
 
     document.getElementById("actual_green").innerHTML = Math.round(Number(document.getElementById("actual_green").innerHTML) * 100) / 100
@@ -685,7 +685,7 @@ function MQTTconnect() {
             document.getElementById("status_green").innerHTML = "offline";
             document.getElementById("status_green").style.color = "red";
             document.getElementById("actual_green").innerHTML = "---";
-        }, 300000)
+        }, 60000)
     }
 
     document.getElementById("actual_blue").innerHTML = Math.round(Number(document.getElementById("actual_blue").innerHTML) * 100) / 100
@@ -705,7 +705,7 @@ function MQTTconnect() {
                                 document.getElementById("status_blue").innerHTML = "offline";
                                 document.getElementById("status_blue").style.color = "red";
                                 document.getElementById("actual_blue").innerHTML = "---";
-                            }, 300000)
+                            }, 60000)
     }
 
     mqtt.onMessageArrived = onMessageArrived
