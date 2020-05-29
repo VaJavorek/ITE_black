@@ -11,6 +11,9 @@ from threading import Timer, Thread
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
+        '''
+        Renders the webpage with the data from .txt files.
+        '''
         data = {}
         data['black'] = {}
         data['pink'] = {}
