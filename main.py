@@ -130,7 +130,6 @@ def store_to_txt(color, status, actual, average, max, min, lastUpdate, sum, numb
     for i in stuff:
       tf.write(i)
       tf.write('\n')
-  print('Stored to txt')
 
 def setOffline(teamName):
     with open('save_{}.txt'.format(teamName)) as f:
@@ -143,11 +142,9 @@ def setOffline(teamName):
         f.close()
 
 def checkTime():
-    print("\nPeriodicity check\n")
     checkOn = datetime.datetime.now()
     for key, value in timeChecking.items():
         delay = (checkOn - value).seconds
-        #print(key,':',delay)
         if delay > 60:
             setOffline(key)
     Timer(10.0, checkTime).start()
