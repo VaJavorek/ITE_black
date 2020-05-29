@@ -100,7 +100,8 @@ class MainHandler(tornado.web.RequestHandler):
         data['blue']['sum'] = blue_lines[6]
         data['blue']['count'] = blue_lines[7]
 
-        self.render('templates/index.html', title='Home Page', year=datetime.datetime.now().year, data = data)
+        self.render('templates/index.html', title='Home Page', year=datetime.datetime.now().year, data = data),
+        # transfering current data to HTML
 
 SERVER = '147.228.124.230'  # RPi
 TOPIC = 'ite/#'
@@ -108,6 +109,9 @@ TOPIC = 'ite/#'
 lastUpdateDay = None
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, mid, qos):
+    '''
+    Subscribe to the MQTT broker.
+    '''
     print('Connected with result code qos:', str(qos))
 
     # Subscribing in on_connect() means that if we lose the connection and
@@ -136,15 +140,15 @@ def store_to_txt(color, status, actual, average, max, min, lastUpdate, sum, numb
 
 def setOffline(teamName):
     '''
-    Sets the sensor from team named 'teamName' to the offline state in .txt file.
+    Sets the sensor from team named {teamName} to the offline state in .txt file.
     '''
     with open('save_{}.txt'.format(teamName)) as f:
-        lines = f.readlines()
+        lines = f.readlines() # load data from txt
     
     if lines[0] == 'online\n':
-        lines[0] = 'offline\n'
+        lines[0] = 'offline\n' # rewrite just the status line
         with open('save_{}.txt'.format(teamName), "w") as f:
-            f.writelines(lines)
+            f.writelines(lines) # save back to txt
         f.close()
 
 def checkTime(): 
@@ -153,42 +157,61 @@ def checkTime():
     '''
     checkOn = datetime.datetime.now()
     for key, value in timeChecking.items():
-        delay = (checkOn - value).seconds
-        if delay > 60:
+        delay = (checkOn - value).seconds # difference between last message's time and the timer's time
+        if delay > 60: 
             setOffline(key)
     Timer(10.0, checkTime).start()
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     '''
-    Gets data from payload to JSON and saves needed JSON sections to the .txt file for individual team names. Used by HTML starting in future.
+    Gets data from payload to the .txt file for individual team names. Used by HTML starting in future.
     '''
+    
     if (msg.payload == 'Q'):
         client.disconnect()
     print(msg.topic, msg.qos, msg.payload)
-    JSON = json.loads(msg.payload)
+    
+    JSON = json.loads(msg.payload) # first load data to JSON format
     teamName = JSON['team_name']
     temperature = JSON['temperature']
     source = JSON['source']
+    
     createdOn = datetime.datetime.strftime(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f'), '%d.%m.%Y %H:%M:%S')
-
+    # message time
+    
     timeChecking[str(teamName)] = datetime.datetime.now() #dictionary of times of last recieved data for individual teams
+    
     if teamName == 'black':
-        blackStatus = 'online'
+        blackStatus = 'online' # this is important when a sensor's outage ends
+        
         if blackDaysAll != []:
             if blackDaysAll[len(blackDaysAll)-1] != datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day:
                 blackAll.clear()
-                blackDaysAll.clear()
+                blackDaysAll.clear() # delete all stored data at the beginning of new day to have the statistics right
+                
         blackActual = temperature
         blackAll.append(temperature)
         blackDaysAll.append(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f').day)
+        # loading the current temp in memory
+        
         blackAverage = sum(blackAll) / len(blackAll)
         blackMax = max(blackAll)
         blackMin = min(blackAll)
         blackLastUpdate = createdOn
-        raw.store_measurement(blackActual)
+        
+        # All stats needed in the webpage
+        
+        raw.store_measurement(blackActual) # this is done only in this branch (only our sensor's data is sent to REST API)
+        
         print('Team:', teamName,'Actual:', blackActual,'Average:', blackAverage,'Max:', blackMax,'Min:', blackMin)
+        
         store_to_txt(teamName, blackStatus, blackActual, blackAverage, blackMax, blackMin, blackLastUpdate, sum(blackAll), len(blackAll))
+        # storing utilized data in specific order
+    
+    
+    # ALL SUBSEQUENT BRANCHES DO THE SAME AS 'BLACK' BRANCH, JUST WITH THEIR CORRESPONDING COLORS
+    
     elif teamName == 'pink':
         pinkStatus = 'online'
         if pinkDaysAll != []:
@@ -288,23 +311,26 @@ def mainClient():
     client.on_connect = on_connect
     client.on_message = on_message
 
-    client.username_pw_set('mqtt_student', password='pivo')
+    client.username_pw_set('mqtt_student', password='pivo') # assigned login details
 
     client.connect(SERVER, 1883, 60)
     client.subscribe(TOPIC)
     print("Subscribed to:",TOPIC)
 
-    client.loop_forever()
+    client.loop_forever() # first threads' loop, it would be impossible to do this without threading library
 
 def mainWebserver():
     '''
-    Starts the main webserver on declared port
+    Starts the main webserver on the declared port.
     '''    
+    
     app = TornadoApplication([(r'/', MainHandler),(r'/(.*)', StaticFileHandler, {
             'path': join_path(dirname(__file__), 'static')})])
-    app.listen(8889)
+    
+    app.listen(8889) # PORT
+    
     f1 = tornado.ioloop.IOLoop.current().start()
-    t1 = Thread(target = f1)
+    t1 = Thread(target = f1) # threading library
     t1.start()
 
 if __name__ == '__main__':
@@ -336,5 +362,5 @@ if __name__ == '__main__':
 
     t2 = Thread(target = f2)
 
-    t2.start()
-    mainWebserver()
+    t2.start() # main program thread
+    mainWebserver() # webserver thread
