@@ -1,8 +1,3 @@
-function on_loaded() {
-    console.log('I am here.');
-    document.getElementById("actual").innerHTML = "black";
-}
-
 var mqtt
 var reconnectTimeout = 2000
 var broker = "147.228.124.230"
@@ -58,7 +53,9 @@ var blueMax
 var blueSum = 0
 var blueInterval
 
-
+/*
+Changes the status of the client when the connection the broker fails
+*/
 function onFailure(message) {
     console.log("Connection to Host " + broker + " failed")
     document.getElementById("client_status").innerHTML = "offline"
@@ -66,6 +63,9 @@ function onFailure(message) {
     setTimeout(MQTTconnect, reconnectTimeout)
 }
 
+/*
+Processes the data and plots it
+*/
 function onMessageArrived(msg) {
     json = JSON.parse(msg.payloadString)
     console.log("New message,", msg.destinationName)
@@ -130,8 +130,9 @@ function onMessageArrived(msg) {
 
             blackLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
-            //blackLastUpdateElement.innerHTML = d
             clearInterval(blackInterval)
+            
+            //Sets the interval after which the sensor will be offline.
             blackInterval = setInterval(function () {
                 blackStatusElement.innerHTML = "offline";
                 blackStatusElement.style.color = "red";
@@ -543,6 +544,9 @@ function onMessageArrived(msg) {
     }
 }
 
+/*
+Sets the client status to online after connecting
+*/
 function onConnect() {
     mqtt.subscribe("ite/#")
     console.log("Connected to broker")
@@ -550,7 +554,9 @@ function onConnect() {
     document.getElementById("client_status").style.color = "green"
 }
 
-
+/*
+Sends messages to the broker.
+*/
 function sendMessage(m, topic) {
     message = new Paho.MQTT.Message(m)
     message.destinationName = topic
@@ -558,6 +564,9 @@ function sendMessage(m, topic) {
     console.log("Message " + m + " published to topic", topic)
 }
 
+/*
+Provides connection to the broker, processes raw data
+*/
 function MQTTconnect() {
     console.log("Connecting to " + broker + " " + port)
     mqtt = new Paho.MQTT.Client(broker, port, clientID)
