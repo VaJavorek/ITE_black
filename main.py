@@ -132,6 +132,9 @@ def store_to_txt(color, status, actual, average, max, min, lastUpdate, sum, numb
       tf.write('\n')
 
 def setOffline(teamName):
+    '''
+    Sets the sensor from team named 'teamName' to the offline state in .txt file.
+    '''
     with open('save_{}.txt'.format(teamName)) as f:
         lines = f.readlines()
     
@@ -141,7 +144,10 @@ def setOffline(teamName):
             f.writelines(lines)
         f.close()
 
-def checkTime():
+def checkTime(): 
+    '''
+    Checks if the time delay after last recieved data from the individual teams did not exceed 60 seconds. If so, calls setOffline method.
+    '''
     checkOn = datetime.datetime.now()
     for key, value in timeChecking.items():
         delay = (checkOn - value).seconds
@@ -151,6 +157,9 @@ def checkTime():
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
+    '''
+    Gets data from payload to JSON and saves needed JSON sections to the .txt file for individual team names. Used by HTML starting in future.
+    '''
     if (msg.payload == 'Q'):
         client.disconnect()
     print(msg.topic, msg.qos, msg.payload)
@@ -160,7 +169,7 @@ def on_message(client, userdata, msg):
     source = JSON['source']
     createdOn = datetime.datetime.strftime(datetime.datetime.strptime(JSON['created_on'], '%Y-%m-%dT%H:%M:%S.%f'), '%d.%m.%Y %H:%M:%S')
 
-    timeChecking[str(teamName)] = datetime.datetime.now() #slovník časů posledních zpráv pro jednotlivé týmy
+    timeChecking[str(teamName)] = datetime.datetime.now() #dictionary of times of last recieved data for individual teams
     if teamName == 'black':
         blackStatus = 'online'
         if blackDaysAll != []:
@@ -269,6 +278,9 @@ def on_message(client, userdata, msg):
         store_to_txt(teamName, blueStatus, blueActual, blueAverage, blueMax, blueMin, blueLastUpdate, sum(blueAll), len(blueAll))
 
 def mainClient():
+    '''
+    Subscribes over the MQTT protocol to the server.
+    '''
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
@@ -282,6 +294,9 @@ def mainClient():
     client.loop_forever()
 
 def mainWebserver():
+    '''
+    Starts the main webserver on declared port
+    '''    
     app = TornadoApplication([(r'/', MainHandler),(r'/(.*)', StaticFileHandler, {
             'path': join_path(dirname(__file__), 'static')})])
     app.listen(8889)
@@ -310,9 +325,9 @@ if __name__ == '__main__':
 
     blueAll = []
     blueDaysAll = []
-
+    
     timeChecking = {}
-    Timer(10.0, checkTime).start()
+    Timer(10.0, checkTime).start() #starts the timer thread
     
     f2 = mainClient
 
