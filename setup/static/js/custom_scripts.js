@@ -98,7 +98,7 @@ function onMessageArrived(msg) {
                 }
                 blackSumElement.innerHTML = Number(blackSumElement.innerHTML) + json.temperature
                 blackCountElement.innerHTML = Number(blackCountElement.innerHTML) + 1
-                blackAverageElement.innerHTML = Math.round((Number(blackSumElement.innerHTML)/Number(blackCountElement.innerHTML)) * 100) / 100
+                blackAverageElement.innerHTML = Math.round((Number(blackSumElement.innerHTML) / Number(blackCountElement.innerHTML)) * 100) / 100
             }
             else {
                 blackStatusElement.style.color = "red"
@@ -121,17 +121,17 @@ function onMessageArrived(msg) {
                 var seconds = d.getSeconds()
             }
 
-            if ((d.getMonth()+1) < 10) {
-                var month = "0" + (d.getMonth()+1)
+            if ((d.getMonth() + 1) < 10) {
+                var month = "0" + (d.getMonth() + 1)
             }
             else {
-                var month = (d.getMonth()+1)
+                var month = (d.getMonth() + 1)
             }
 
             blackLastUpdateElement.innerHTML = d.getDate() + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + minutes + ":" + seconds
             console.log(json.created_on)
             clearInterval(blackInterval)
-            
+
             //Sets the interval after which the sensor will be offline.
             blackInterval = setInterval(function () {
                 blackStatusElement.innerHTML = "offline";
@@ -584,7 +584,8 @@ function MQTTconnect() {
     document.getElementById("avg_black").innerHTML = Math.round(Number(document.getElementById("avg_black").innerHTML) * 100) / 100
     document.getElementById("max_black").innerHTML = Math.round(Number(document.getElementById("max_black").innerHTML) * 100) / 100
     document.getElementById("min_black").innerHTML = Math.round(Number(document.getElementById("min_black").innerHTML) * 100) / 100
-    if (document.getElementById("status_black").innerHTML == "offline") {
+
+    if (document.getElementById("status_black").innerHTML.replace(/\s/g,'') == "offline") {
         document.getElementById("status_black").style.color = "red"
         document.getElementById("actual_black").innerHTML = "---"
     }
@@ -604,7 +605,7 @@ function MQTTconnect() {
     document.getElementById("avg_pink").innerHTML = Math.round(Number(document.getElementById("avg_pink").innerHTML) * 100) / 100
     document.getElementById("max_pink").innerHTML = Math.round(Number(document.getElementById("max_pink").innerHTML) * 100) / 100
     document.getElementById("min_pink").innerHTML = Math.round(Number(document.getElementById("min_pink").innerHTML) * 100) / 100
-    if (document.getElementById("status_pink").innerHTML == "offline") {
+    if (document.getElementById("status_pink").innerHTML.replace(/\s/g, '') == "offline") {
         document.getElementById("status_pink").style.color = "red"
         document.getElementById("actual_pink").innerHTML = "---"
     }
@@ -624,7 +625,7 @@ function MQTTconnect() {
     document.getElementById("avg_yellow").innerHTML = Math.round(Number(document.getElementById("avg_yellow").innerHTML) * 100) / 100
     document.getElementById("max_yellow").innerHTML = Math.round(Number(document.getElementById("max_yellow").innerHTML) * 100) / 100
     document.getElementById("min_yellow").innerHTML = Math.round(Number(document.getElementById("min_yellow").innerHTML) * 100) / 100
-    if (document.getElementById("status_yellow").innerHTML == "offline") {
+    if (document.getElementById("status_yellow").innerHTML.replace(/\s/g, '') == "offline") {
         document.getElementById("status_yellow").style.color = "red"
         document.getElementById("actual_yellow").innerHTML = "---"
     }
@@ -644,7 +645,7 @@ function MQTTconnect() {
     document.getElementById("avg_orange").innerHTML = Math.round(Number(document.getElementById("avg_orange").innerHTML) * 100) / 100
     document.getElementById("max_orange").innerHTML = Math.round(Number(document.getElementById("max_orange").innerHTML) * 100) / 100
     document.getElementById("min_orange").innerHTML = Math.round(Number(document.getElementById("min_orange").innerHTML) * 100) / 100
-    if (document.getElementById("status_orange").innerHTML == "offline") {
+    if (document.getElementById("status_orange").innerHTML.replace(/\s/g, '') == "offline") {
         document.getElementById("status_orange").style.color = "red"
         document.getElementById("actual_orange").innerHTML = "---"
     }
@@ -664,7 +665,7 @@ function MQTTconnect() {
     document.getElementById("avg_red").innerHTML = Math.round(Number(document.getElementById("avg_red").innerHTML) * 100) / 100
     document.getElementById("max_red").innerHTML = Math.round(Number(document.getElementById("max_red").innerHTML) * 100) / 100
     document.getElementById("min_red").innerHTML = Math.round(Number(document.getElementById("min_red").innerHTML) * 100) / 100
-    if (document.getElementById("status_red").innerHTML == "offline") {
+    if (document.getElementById("status_red").innerHTML.replace(/\s/g, '') == "offline") {
         document.getElementById("status_red").style.color = "red"
         document.getElementById("actual_red").innerHTML = "---"
     }
@@ -684,7 +685,7 @@ function MQTTconnect() {
     document.getElementById("avg_green").innerHTML = Math.round(Number(document.getElementById("avg_green").innerHTML) * 100) / 100
     document.getElementById("max_green").innerHTML = Math.round(Number(document.getElementById("max_green").innerHTML) * 100) / 100
     document.getElementById("min_green").innerHTML = Math.round(Number(document.getElementById("min_green").innerHTML) * 100) / 100
-    if (document.getElementById("status_green").innerHTML == "offline") {
+    if (document.getElementById("status_green").innerHTML.replace(/\s/g, '') == "offline") {
         document.getElementById("status_green").style.color = "red"
         document.getElementById("actual_green").innerHTML = "---"
     }
@@ -704,17 +705,17 @@ function MQTTconnect() {
     document.getElementById("avg_blue").innerHTML = Math.round(Number(document.getElementById("avg_blue").innerHTML) * 100) / 100
     document.getElementById("max_blue").innerHTML = Math.round(Number(document.getElementById("max_blue").innerHTML) * 100) / 100
     document.getElementById("min_blue").innerHTML = Math.round(Number(document.getElementById("min_blue").innerHTML) * 100) / 100
-    if (document.getElementById("status_blue").innerHTML == "offline") {
+    if (document.getElementById("status_blue").innerHTML.replace(/\s/g, '') == "offline") {
         document.getElementById("status_blue").style.color = "red"
         document.getElementById("actual_blue").innerHTML = "---"
     }
     else {
         document.getElementById("status_blue").style.color = "green"
         blueInterval = setInterval(function () {
-                                document.getElementById("status_blue").innerHTML = "offline";
-                                document.getElementById("status_blue").style.color = "red";
-                                document.getElementById("actual_blue").innerHTML = "---";
-                            }, 60000)
+            document.getElementById("status_blue").innerHTML = "offline";
+            document.getElementById("status_blue").style.color = "red";
+            document.getElementById("actual_blue").innerHTML = "---";
+        }, 60000)
     }
 
     mqtt.onMessageArrived = onMessageArrived

@@ -8,6 +8,7 @@ import math
 import requests
 import rest_api as raw
 from threading import Timer, Thread
+import time
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -363,4 +364,7 @@ if __name__ == '__main__':
     t2 = Thread(target = f2)
 
     t2.start() # main program thread
+    print('Initializing...')
+    time.sleep(20) # time delay to prepare text files at startup
     mainWebserver() # webserver thread
+    print('Webserver ready')
