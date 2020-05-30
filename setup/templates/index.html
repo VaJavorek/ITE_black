@@ -1,0 +1,280 @@
+<!--Export code from layout.html-->
+{% extends 'layout.html' %}
+
+<!--Content intended for block content in layout.html-->
+{% block content %}
+    <div class="jumbotron">
+        <br/>
+        <br/>
+        <p>Client status: <strong id="client_status"></strong></p>
+        <table width="100%">
+            <tr>
+                <td>
+                    <!--Display data for a Black team-->
+                    <h1><small>Team: </small><strong style="color:black">Black</strong></h1>
+
+                    <p>Sensor status: <strong id="status_black">{{data['black']['status']}}</strong></p>
+
+                    <p id="sum_black" hidden>{{data['black']['sum']}}</p>
+                    <p id="count_black" hidden>{{data['black']['count']}}</p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Current temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_black">{{data['black']['actual']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_black">{{data['black']['average']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_black">{{data['black']['max']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_black">{{data['black']['min']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_black">{{data['black']['last_update']}}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <!--Display data for a Pink team-->
+                    <h1><small>Team: </small><strong style="color:pink">Pink</strong></h1>
+
+                    <p>Sensor status: <strong id="status_pink">{{data['pink']['status']}}</strong></p>
+
+                    <p id="sum_pink" hidden>{{data['pink']['sum']}}</p>
+                    <p id="count_pink" hidden>{{data['pink']['count']}}</p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Current temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_pink">{{data['pink']['actual']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_pink">{{data['pink']['average']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_pink">{{data['pink']['max']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_pink">{{data['pink']['min']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_pink">{{data['pink']['last_update']}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!--Display data for a Yellow team-->
+                    <h1><small>Team: </small><strong style="color:yellow">Yellow</strong></h1>
+
+                    <p>Sensor status: <strong id="status_yellow">{{data['yellow']['status']}}</strong></p>
+
+                    <p id="sum_yellow" hidden>{{data['yellow']['sum']}}</p>
+                    <p id="count_yellow" hidden>{{data['yellow']['count']}}</p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Current temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_yellow">{{data['yellow']['actual']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_yellow">{{data['yellow']['average']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_yellow">{{data['yellow']['max']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_yellow">{{data['yellow']['min']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_yellow">{{data['yellow']['last_update']}}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <!--Display data for a Orange team-->
+                    <h1><small>Team: </small><strong style="color:orange">Orange</strong></h1>
+
+                    <p>Sensor status: <strong id="status_orange">{{data['orange']['status']}}</strong></p>
+
+                    <p id="sum_orange" hidden>{{data['orange']['sum']}}</p>
+                    <p id="count_orange" hidden>{{data['orange']['count']}}</p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Current temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_orange">{{data['orange']['actual']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_orange">{{data['orange']['average']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_orange">{{data['orange']['max']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_orange">{{data['orange']['min']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_orange">{{data['orange']['last_update']}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!--Display data for a Red team-->
+                    <h1><small>Team: </small><strong style="color:red">Red</strong></h1>
+
+                    <p>Sensor status: <strong id="status_red">{{data['red']['status']}}</strong></p>
+
+                    <p id="sum_red" hidden>{{data['red']['sum']}}</p>
+                    <p id="count_red" hidden>{{data['red']['count']}}</p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Current temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_red">{{data['red']['actual']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_red">{{data['red']['average']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_red">{{data['red']['max']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_red">{{data['red']['min']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_red">{{data['red']['last_update']}}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <!--Display data for a Green team-->
+                    <h1><small>Team: </small><strong style="color:green">Green</strong></h1>
+
+                    <p>Sensor status: <strong id="status_green">{{data['green']['status']}}</strong></p>
+
+                    <p id="sum_green" hidden>{{data['green']['sum']}}</p>
+                    <p id="count_green" hidden>{{data['green']['count']}}</p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Current temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_green">{{data['green']['actual']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_green">{{data['green']['average']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_green">{{data['green']['max']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_green">{{data['green']['min']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_green">{{data['green']['last_update']}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!--Display data for a Blue team-->
+                    <h1><small>Team: </small><strong style="color:blue">Blue</strong></h1>
+                    
+                    <p>Sensor status: <strong id="status_blue">{{data['blue']['status']}}</strong></p>
+
+                    <p id="sum_blue" hidden>{{data['blue']['sum']}}</p>
+                    <p id="count_blue" hidden>{{data['blue']['count']}}</p>
+
+                    <table weight="75%">
+                        <tr>
+                            <th>Current temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="actual_blue">{{data['blue']['actual']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Average daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="avg_blue">{{data['blue']['average']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Maximal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="max_blue">{{data['blue']['max']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Minimal daily temperature:</th>
+                            <td>&nbsp;</td>
+                            <td align="center"><span id="min_blue">{{data['blue']['min']}}</span> &deg;C</td>
+                        </tr>
+                        <tr>
+                            <th>Last update:</th>
+                            <td>&nbsp;</td>
+                            <td align="center" id="last_update_blue">{{data['blue']['last_update']}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% end %}

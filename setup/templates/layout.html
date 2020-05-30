@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KKY/ITE - team BLACK</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/custom_scripts.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+</head>
+
+<body onload=MQTTconnect()>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <h1 align="center" style="color: #bfbfbf">KKY/ITE - team BLACK</h1>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <!--Area for data block content in other files-->
+        {% block content %}{% end %}
+        <hr />
+        <footer>
+            <p>&copy; {{ year }} - Jiří Švamberg, Václav Javorek, Ondřej Valach</p>
+        </footer>
+    </div>
+
+    <!--Area for scripts in other files-->
+    {% block scripts %}{% end %}
+
+</body>
+</html>
