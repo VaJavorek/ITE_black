@@ -31,7 +31,7 @@ def store_measurement(temp):
     headers_measurements = headers_sensors
     now = datetime.now()
     date_time = str(now).split(' ')
-    date_time[1] = date_time[1][:-3]+"+02:00"
+    date_time[1] = date_time[1][:-3]+"+00:00"
     createdOn = date_time[0]+'T'+date_time[1] #sets the time in the acceptable format
 
     body_measurements = {'createdOn': createdOn, 'sensorUUID': sensorUUID, 'temperature': str(temp), 'status': 'OK'}
@@ -45,7 +45,7 @@ def store_measurement(temp):
         headers_alerts = headers_sensors
         now = datetime.now()
         date_time = str(now).split(' ')
-        date_time[1] = date_time[1][:-3]+"+02:00"
+        date_time[1] = date_time[1][:-3]+"+00:00"
         createdOn = date_time[0]+'T'+date_time[1] #sets the time in the acceptable format
 
         body_alerts = {'createdOn': createdOn, 'sensorUUID': sensorUUID, 'temperature': str(temp), 'lowTemperature': str(lowTemp), 'highTemperature': str(highTemp)}
