@@ -4,7 +4,7 @@ Repository for our university team project: getting temperature sensor data to a
 Use ZCU VPN: http://147.228.121.17:8889
 
 Instalace:
-1) Na server s předinstalovaným Pythonem 3.7 a programem tmux nahrajte složku setup.
+1) Na server s předinstalovaným Pythonem 3.7 a programem tmux nahrajte obsah složky setup.
 2) Na serveru vytvořte session pomocí programu tmux, ve které poběží program nepřetržitě:
 
     tmux new -s 'nazev\_session'
