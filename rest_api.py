@@ -34,7 +34,7 @@ def store_measurement(temp):
     date_time[1] = date_time[1][:-3]+"+02:00"
     createdOn = date_time[0]+'T'+date_time[1] #sets the time in the acceptable format
 
-    body_measurements = {'createdOn': createdOn, 'sensorUUID': sensorUUID, 'temperature': str(temp), 'status': 'OK', 'timestamp': 1576498800000}
+    body_measurements = {'createdOn': createdOn, 'sensorUUID': sensorUUID, 'temperature': str(temp), 'status': 'OK'}
     requests.post(url_measurements, data=dumps_json(body_measurements), headers=headers_measurements)
     
     # create alert if the temperature steps out of the bounds
